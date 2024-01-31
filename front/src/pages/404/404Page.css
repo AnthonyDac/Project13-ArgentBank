@@ -1,0 +1,43 @@
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+.notFoundContainer h2 {
+  margin: 20px 0 50px 0;
+  font-size: 288px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  color: rgb(0, 188, 119);
+}
+
+.notFoundContainer p {
+  margin: 20px 0 50px 0;
+  font-size: 36px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  color: rgb(0, 188, 119);
+}
+
+.notFoundContainer a {
+  margin: 20px 0 109px 0;
+  font-size: 18px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  color: rgb(0, 188, 119);
+}
+
+@media (max-width: 426px) {
+  .notFoundContainer h2 {
+    font-size: 96px;
+  }
+
+  .notFoundContainer p {
+    width: 260px;
+    font-size: 18px;
+    text-align: center;
+  }
+}

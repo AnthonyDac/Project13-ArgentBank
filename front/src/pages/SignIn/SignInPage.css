@@ -1,0 +1,102 @@
+.mainContainer {
+  background-color: #12002b;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.mainContainer .formContainer {
+  background-color: #fff;
+  overflow: hidden;
+  width: 236px;
+  max-width: 100%;
+  min-height: 300px;
+  margin-top: 50px;
+  padding: 32px;
+}
+
+.mainContainer .formContainer .formHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainContainer .formContainer .formHeader h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #12002b;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mainContainer .formContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mainContainer .formContainer .formEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.mainContainer .formContainer .formRemember {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mainContainer .formContainer form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #12002b;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mainContainer .formContainer form input {
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #12002b;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mainContainer .formContainer form input:focus {
+  outline: none;
+  border: 1px solid #00bc77;
+}
+
+.mainContainer .formContainer form input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+.mainContainer .formContainer form button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #00bc77;
+  color: #fff;
+  border: none;
+  text-decoration: underline;
+}
+
+.mainContainer .formContainer form button:hover {
+  background-color: #00a86b;
+  cursor: pointer;
+}
+
+@media (max-width: 426px) {
+}

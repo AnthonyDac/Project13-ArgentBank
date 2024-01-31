@@ -1,0 +1,21 @@
+.featuresContainer {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  background: white;
+  justify-content: space-evenly; /* Distribuer l'espace entre les éléments */
+  align-items: flex-start;
+  padding: 40px 0 70px 0;
+}
+
+@media (max-width: 426px) {
+  .featuresContainer {
+    width: 100%;
+    gap: 30px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    background: transparent;
+    margin: 0;
+  }
+}

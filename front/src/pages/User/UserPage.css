@@ -1,0 +1,116 @@
+.userContainer {
+  width: 100%;
+  background-color: #12002b;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userContainer .header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userContainer .header h1 {
+  width: fit-content;
+  font-size: 2em;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+.userContainer .header button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.userContainer .header button:hover {
+  cursor: pointer;
+}
+
+.userContainer .accountsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  gap: 30px;
+}
+
+.userContainer .accountsContainer .account {
+  width: 80%;
+  background: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userContainer .accountsContainer .account .accountName {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.userContainer .accountsContainer .account .accountName p {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(44, 62, 80);
+  text-decoration: none;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.userContainer .accountsContainer .account .accountName h1 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: normal;
+  color: rgb(44, 62, 80);
+  text-decoration: none;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.userContainer .accountsContainer .account .accountName p:last-child {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: normal;
+  color: rgb(44, 62, 80);
+  text-decoration: none;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.userContainer .accountsContainer .account button {
+  display: block;
+  padding: 8px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+.userContainer .accountsContainer .account button:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 426px) {
+}
