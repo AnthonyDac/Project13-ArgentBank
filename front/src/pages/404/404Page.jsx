@@ -4,18 +4,27 @@ import FooterComponent from '../../components/Footer/FooterComponent';
 import './404Page.css';
 import { Link } from 'react-router-dom';
 
-function NotFoundPage() {
-  return (
-    <>
-      <TopNav />
-      <section className="notFoundContainer">
-        <h2>404</h2>
-        <p>Oups! La page que vous demandez n'existe pas.</p>
-        <Link to="/">Retourner sur la page d’accueil</Link>
-      </section>
-      <FooterComponent />
-    </>
-  );
+class NotFoundPage extends React.Component {
+
+  componentDidMount() {
+    // Modifier le titre de l'onglet
+    document.title = 'Argent Bank - 404 Not Found';
+  }
+
+
+  render() {
+    return (
+      <>
+        <TopNav />
+        <section className="notFoundContainer">
+          <h2>404</h2>
+          <p>Oups! La page que vous demandez n'existe pas.</p>
+          <Link to="/">Retourner sur la page d’accueil</Link>
+        </section>
+        <FooterComponent />
+      </>
+    );
+  }
 }
 
 export default NotFoundPage;
