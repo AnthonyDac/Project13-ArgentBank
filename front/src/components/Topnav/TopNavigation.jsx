@@ -12,7 +12,7 @@ function TopNav() {
           <img src="/src/assets/argentBankLogo.png"></img>
         </div>
         <div className="topNavigationMenu">
-          <Link to="/signin"><i className='fa fa-user-circle'></i> Sign in</Link>
+          <Link to="/sign-in"><i className='fa fa-user-circle'></i> Sign in</Link>
         </div>
       </nav>
     </>
