@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import TopNav from '../../components/Topnav/TopNavigation';
 import FooterComponent from '../../components/Footer/FooterComponent';
 import './SignInPage.css';
@@ -7,13 +8,15 @@ import './SignInPage.css';
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setMessage] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    if (!email) return setError('Email is required');
-    if (!password) return setError('Password is required');
+    if (!email) return setMessage('Email is required');
+    if (!password) return setMessage('Password is required');
     try {
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
@@ -27,26 +30,28 @@ const SignInPage = () => {
         const data = await response.json();
 
         if (data.status === 200) {
-          setError('You are now connected');
+          // Dispatch de l'action pour mettre à jour le token dans le store
+          dispatch({ type: 'SET_TOKEN', payload: data.token });
+          setMessage('You are now connected');
           setTimeout(() => {
             // Redirect to the home page
             navigate('/');
           }, 2000);
         } else {
-          setError('An error occurred');
+          setMessage('An error occurred');
         }
       } else {
         const errorData = await response.json();
 
         if (errorData.status === 400) {
-          setError(errorData.message);
+          setMessage(errorData.message);
         } else {
-          setError('An error occurred');
+          setMessage('An error occurred');
         }
       }
     } catch (error) {
       console.error('An error occured :', error);
-      setError('An error occurred, please try again later');
+      setMessage('An error occurred, please try again later');
     }
   };
 
