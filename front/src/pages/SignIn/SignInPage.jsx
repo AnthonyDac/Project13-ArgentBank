@@ -31,7 +31,8 @@ const SignInPage = () => {
 
         if (data.status === 200) {
           // Dispatch de l'action pour mettre à jour le token dans le store
-          dispatch({ type: 'SET_TOKEN', payload: data.token });
+          dispatch({ type: 'SET_TOKEN', payload: data.body.token });
+
           setMessage('You are now connected');
           setTimeout(() => {
             // Redirect to the home page
