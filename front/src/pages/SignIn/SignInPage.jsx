@@ -12,6 +12,7 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.profile.user);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -34,10 +35,11 @@ const SignInPage = () => {
           dispatch({ type: 'SET_TOKEN', payload: data.body.token });
 
           setMessage('You are now connected');
-          setTimeout(() => {
-            // Redirect to the home page
-            navigate('/');
-          }, 2000);
+          // Récupération des données utilisateur
+          if (data.body.token) {
+            // Récupération des données utilisateur
+            await getUserProfile();
+          }
         } else {
           setMessage('An error occurred');
         }
@@ -55,6 +57,33 @@ const SignInPage = () => {
       setMessage('An error occurred, please try again later');
     }
   };
+
+  async function getUserProfile() {
+    if (token) {
+      try {
+        const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data.status === 200) {
+            console.log(data.body)
+            dispatch({ type: 'SET_USER_DATA', payload: data.body });
+            navigate('/');
+          } else {
+            setMessage('An error occurred');
+          }
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    }
+  }
 
   return (
     <>
