@@ -9,6 +9,11 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload,
             };
+        case "RESET_USER_DATA":
+            return {
+                ...state,
+                user: undefined,
+            };
         default:
             return state;
     }

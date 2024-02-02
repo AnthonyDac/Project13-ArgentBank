@@ -9,6 +9,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 token: action.payload,
             };
+        case 'RESET_TOKEN':
+            return {
+                ...state,
+                token: null,
+            };
         default:
             return state;
     }
