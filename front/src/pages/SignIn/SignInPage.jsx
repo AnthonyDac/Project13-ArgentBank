@@ -8,16 +8,19 @@ import './SignInPage.css';
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setMessage] = useState(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.profile.user);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    if (!email) return setMessage('Email is required');
-    if (!password) return setMessage('Password is required');
+
+    if (!email || !password) {
+      setError('Email and password are required');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
@@ -31,59 +34,52 @@ const SignInPage = () => {
         const data = await response.json();
 
         if (data.status === 200) {
-          // Dispatch de l'action pour mettre à jour le token dans le store
           dispatch({ type: 'SET_TOKEN', payload: data.body.token });
 
-          setMessage('You are now connected');
-          // Récupération des données utilisateur
-          if (data.body.token) {
-            // Récupération des données utilisateur
-            await getUserProfile();
-          }
+          setError(null);
+          await getUserProfile(data.body.token);
         } else {
-          setMessage('An error occurred');
+          setError('An error occurred');
         }
       } else {
         const errorData = await response.json();
 
         if (errorData.status === 400) {
-          setMessage(errorData.message);
+          setError(errorData.message);
         } else {
-          setMessage('An error occurred');
+          setError('An error occurred');
         }
       }
     } catch (error) {
-      console.error('An error occured :', error);
-      setMessage('An error occurred, please try again later');
+      console.error('An error occurred:', error);
+      setError('An error occurred, please try again later');
     }
   };
 
-  async function getUserProfile() {
-    if (token) {
-      try {
-        const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${token}`,
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
+  const getUserProfile = async (token) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`,
+        },
+      });
 
-          if (data.status === 200) {
-            console.log(data.body)
-            dispatch({ type: 'SET_USER_DATA', payload: data.body });
-            navigate('/');
-          } else {
-            setMessage('An error occurred');
-          }
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.status === 200) {
+          dispatch({ type: 'SET_USER_DATA', payload: data.body });
+          navigate('/');
+        } else {
+          setError('An error occurred');
         }
-      } catch (error) {
-        console.error('An error occurred:', error);
       }
+    } catch (error) {
+      console.error('An error occurred:', error);
     }
-  }
+  };
 
   return (
     <>
