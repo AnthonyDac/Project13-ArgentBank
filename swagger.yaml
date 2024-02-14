@@ -237,7 +237,7 @@ paths:
           description: Internal Server Error
 
   /user/accounts/{accountId}/transactions/{transactionsId}/notes:
-    patch:
+    put:
       tags:
         - User Transactions
       summary: Update an existing transaction (notes)
@@ -279,7 +279,7 @@ paths:
           description: Internal Server Error
 
   /user/accounts/{accountId}/transactions/{transactionsId}/category:
-    patch:
+    put:
       tags:
         - User Transactions
       summary: Update an existing transaction (category)
