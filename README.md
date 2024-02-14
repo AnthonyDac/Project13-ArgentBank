@@ -21,7 +21,7 @@ node --version
 mongo --version
 ```
 
-### Instructions
+### Instructions Back-end
 
 1. Fork this repo
 1. Clone the repo onto your computer
@@ -37,6 +37,20 @@ npm run dev:server
 
 # Populate database with two users
 npm run populate-db
+```
+
+### Instructions Front-end
+
+```bash
+# Accéder au dossier du front
+cd front
+
+# Installer les dépendances
+npm install
+
+# Démarrer React
+npm run dev
+
 ```
 
 Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
