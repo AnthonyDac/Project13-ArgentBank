@@ -26,13 +26,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: Login Successfully
+          description: "Login Successfully"
           schema:
             $ref: "#/definitions/LoginResponse"
         "400":
-          description: Invalid Fields
+          description: "Invalid Fields"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
   /user/signup:
     post:
       tags:
@@ -50,13 +50,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: Signup Successfully
+          description: "Signup Successfully"
           schema:
             $ref: "#/definitions/ApiResponse"
         "400":
-          description: Invalid Fields
+          description: "Invalid Fields"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
   /user/profile:
     get:
       security:
@@ -75,13 +75,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: User profile retrieved successfully
+          description: "User profile retrieved successfully"
           schema:
             $ref: "#/definitions/ApiResponse"
         "400":
-          description: Invalid Fields
+          description: "Invalid Fields"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
     put:
       security:
         - Bearer: []
@@ -105,14 +105,14 @@ paths:
         - application/json
       responses:
         "200":
-          description: User profile retrieved successfully
+          description: "User profile retrieved successfully"
           schema:
             $ref: "#/definitions/ApiResponse"
         "400":
-          description: Invalid Fields
+          description: "Invalid Fields"
         "500":
-          description: Internal Server Error
-  /user/accounts/{accountId}:
+          description: "Internal Server Error"
+  /user/accounts/{userId}:
     get:
       tags:
         - User Transactions
@@ -125,31 +125,31 @@ paths:
           type: string
           required: true
         - in: path
-          name: accountId
-          description: User's account ID
+          name: userId
+          description: User's ID
           type: integer
           required: true
       responses:
         "200":
-          description: Transaction retrieved successfully
+          description: "Transaction retrieved successfully"
           schema:
             $ref: "#/definitions/Accounts"
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: "Bad request. User ID must be an integer and larger than 0."
         "401":
-          description: Unauthorized, invalid token
+          description: "Unauthorized, invalid token"
         "403":
-          description: Forbidden, user does not have access to this account
+          description: "Forbidden, user does not have access to this account"
         "404":
-          description: Account not found
+          description: "Account not found"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
   /user/accounts/{accountId}/transactions:
     get:
       tags:
         - User Transactions
       summary: Transactions
-      description: API for getting all transactions for the current month
+      description: API for getting all transactions from account's ID
       parameters:
         - in: header
           name: Authorization
@@ -163,19 +163,57 @@ paths:
           required: true
       responses:
         "200":
-          description: Transaction retrieved successfully
+          description: "Transaction retrieved successfully"
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/TransactionsList"
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: "Bad request. User ID must be an integer and larger than 0."
         "401":
-          description: Unauthorized, invalid token
+          description: "Unauthorized, invalid token"
         "403":
-          description: Forbidden, user does not have access to this account
+          description: "Forbidden, user does not have access to this account"
         "404":
-          description: Account not found
+          description: "Account not found"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
+  /user/accounts/{accountId}/transactions/{month}:
+    get:
+      tags:
+        - User Transactions
+      summary: Transactions
+      description: API for getting all monthly transactions from account's ID
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+        - in: path
+          name: accountId
+          description: User's account ID
+          type: integer
+          required: true
+        - in: path
+          name: month
+          description: Month to display
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "Transaction retrieved successfully"
+          schema:
+            $ref: "#/definitions/TransactionsList"
+        "400":
+          description: "Bad request. User ID must be an integer and larger than 0."
+        "401":
+          description: "Unauthorized, invalid token"
+        "403":
+          description: "Forbidden, user does not have access to this account"
+        "404":
+          description: "Account not found"
+        "500":
+          description: "Internal Server Error"
+  /user/accounts/{accountId}/transactions/create:
     post:
       tags:
         - User Transactions
@@ -201,23 +239,22 @@ paths:
           description: New transaction details
           required: true
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/TransactionsCreation"
       responses:
         "201":
-          description: Transaction created successfully
+          description: "Transaction created successfully"
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/TransactionsCreated"
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: "Bad request. User ID must be an integer and larger than 0."
         "401":
-          description: Unauthorized, invalid token
+          description: "Unauthorized, invalid token"
         "403":
-          description: Forbidden, user does not have access to this account
+          description: "Forbidden, user does not have access to this account"
         "404":
-          description: Account not found
+          description: "Account not found"
         "500":
-          description: Internal Server Error
-
+          description: "Internal Server Error"
   /user/accounts/{accountId}/transactions/delete/{transactionId}:
     delete:
       tags:
@@ -242,17 +279,19 @@ paths:
           required: true
       responses:
         "204":
-          description: Transaction deleted successfully
+          schema:
+            $ref: "#/definitions/TransactionsDelete"
+          description: "Transaction deleted successfully"
         "400":
-          description: Bad request. User ID/Transaction ID must be an integer and larger than 0.
+          description: "Bad request. User ID/Transaction ID must be an integer and larger than 0."
         "401":
-          description: Unauthorized, invalid token
+          description: "Unauthorized, invalid token"
         "403":
-          description: Forbidden, user does not have access to this account
+          description: "Forbidden, user does not have access to this account"
         "404":
-          description: Transaction not found
+          description: "Transaction not found"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
 
   /user/accounts/{accountId}/transactions/{transactionsId}/notes:
     put:
@@ -288,19 +327,19 @@ paths:
             $ref: "#/definitions/TransactionsUpdateNotes"
       responses:
         "200":
-          description: Transaction updated successfully
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/TransactionsUnique"
+          description: "Transaction updated successfully"
         "400":
-          description: Bad request. User ID/ transaction ID must be an integer and larger than 0 or notes invalid.
+          description: "Bad request. User ID/ transaction ID must be an integer and larger than 0 or notes invalid."
         "401":
-          description: Unauthorized, invalid token
+          description: "Unauthorized, invalid token"
         "403":
-          description: Forbidden, user does not have access to this account
+          description: "Forbidden, user does not have access to this account"
         "404":
-          description: Account not found
+          description: "Account not found"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
 
   /user/accounts/{accountId}/transactions/{transactionsId}/category:
     put:
@@ -336,19 +375,19 @@ paths:
             $ref: "#/definitions/TransactionsUpdateCategory"
       responses:
         "200":
-          description: Transaction updated successfully
+          description: "Transaction updated successfully"
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/TransactionsUnique"
         "400":
-          description: Bad request. User ID/ transaction ID must be an integer and larger than 0 or category invalid.
+          description: "Bad request. User ID/ transaction ID must be an integer and larger than 0 or category invalid."
         "401":
-          description: Unauthorized, invalid token
+          description: "Unauthorized, invalid token"
         "403":
-          description: Forbidden, user does not have access to this account
+          description: "Forbidden, user does not have access to this account"
         "404":
-          description: Account not found
+          description: "Account not found"
         "500":
-          description: Internal Server Error
+          description: "Internal Server Error"
 
 securityDefinitions:
   Bearer:
@@ -405,21 +444,81 @@ definitions:
       lastName:
         type: string
   Accounts:
+    type: array
+    items:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        accountName:
+          type: string
+        accountType:
+          type: string
+        balance:
+          type: number
+          format: double
+        currency:
+          type: string
+  TransactionsList:
     type: object
     properties:
+      accountInfos:
+        type: object
+        properties:
+          balance:
+            type: number
+            format: double
+          currency:
+            type: string
+      transactions:
+        type: array
+        items:
+          type: object
+          properties:
+            transactionsId:
+              type: integer
+              format: int64
+            date:
+              type: string
+            description:
+              type: string
+            amount:
+              type: number
+            currency:
+              type: string
+            type:
+              type: string
+            category:
+              type: string
+            notes:
+              type: string
+  TransactionsCreated:
+    type: object
+    properties:
+      message:
+        type: string
       accountId:
         type: integer
         format: int64
-      accountName:
+  TransactionsCreation:
+    type: object
+    properties:
+      date:
         type: string
-      accountType:
+      description:
         type: string
-      balance:
+      amount:
         type: number
-        format: double
       currency:
         type: string
-  Transactions:
+      type:
+        type: string
+      category:
+        type: string
+      notes:
+        type: string
+  TransactionsUnique:
     type: object
     properties:
       transactionsId:
@@ -448,4 +547,9 @@ definitions:
     type: object
     properties:
       notes:
+        type: string
+  TransactionsDelete:
+    type: object
+    properties:
+      message:
         type: string
