@@ -116,8 +116,8 @@ paths:
     get:
       tags:
         - User Transactions
-      summary: User's Account
-      description: API for getting all accounts
+      summary: User's Accounts
+      description: API for getting all accounts owned by user
       parameters:
         - in: header
           name: Authorization
@@ -133,9 +133,15 @@ paths:
         "200":
           description: Transaction retrieved successfully
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/Accounts"
         "400":
           description: Bad request. User ID must be an integer and larger than 0.
+        "401":
+          description: Unauthorized, invalid token
+        "403":
+          description: Forbidden, user does not have access to this account
+        "404":
+          description: Account not found
         "500":
           description: Internal Server Error
   /user/accounts/{accountId}/transactions:
@@ -162,6 +168,12 @@ paths:
             $ref: "#/definitions/Transactions"
         "400":
           description: Bad request. User ID must be an integer and larger than 0.
+        "401":
+          description: Unauthorized, invalid token
+        "403":
+          description: Forbidden, user does not have access to this account
+        "404":
+          description: Account not found
         "500":
           description: Internal Server Error
     post:
@@ -199,6 +211,10 @@ paths:
           description: Bad request. User ID must be an integer and larger than 0.
         "401":
           description: Unauthorized, invalid token
+        "403":
+          description: Forbidden, user does not have access to this account
+        "404":
+          description: Account not found
         "500":
           description: Internal Server Error
 
@@ -231,6 +247,8 @@ paths:
           description: Bad request. User ID/Transaction ID must be an integer and larger than 0.
         "401":
           description: Unauthorized, invalid token
+        "403":
+          description: Forbidden, user does not have access to this account
         "404":
           description: Transaction not found
         "500":
@@ -274,7 +292,13 @@ paths:
           schema:
             $ref: "#/definitions/Transactions"
         "400":
-          description: Bad request. User ID/ transaction ID must be an integer and larger than 0.
+          description: Bad request. User ID/ transaction ID must be an integer and larger than 0 or notes invalid.
+        "401":
+          description: Unauthorized, invalid token
+        "403":
+          description: Forbidden, user does not have access to this account
+        "404":
+          description: Account not found
         "500":
           description: Internal Server Error
 
@@ -316,7 +340,13 @@ paths:
           schema:
             $ref: "#/definitions/Transactions"
         "400":
-          description: Bad request. User ID/ transaction ID must be an integer and larger than 0.
+          description: Bad request. User ID/ transaction ID must be an integer and larger than 0 or category invalid.
+        "401":
+          description: Unauthorized, invalid token
+        "403":
+          description: Forbidden, user does not have access to this account
+        "404":
+          description: Account not found
         "500":
           description: Internal Server Error
 
@@ -373,6 +403,21 @@ definitions:
       firstName:
         type: string
       lastName:
+        type: string
+  Accounts:
+    type: object
+    properties:
+      accountId:
+        type: integer
+        format: int64
+      accountName:
+        type: string
+      accountType:
+        type: string
+      balance:
+        type: number
+        format: double
+      currency:
         type: string
   Transactions:
     type: object
