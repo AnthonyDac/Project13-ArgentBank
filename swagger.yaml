@@ -112,7 +112,7 @@ paths:
           description: "Invalid Fields"
         "500":
           description: "Internal Server Error"
-  /user/accounts/{userId}:
+  /user/accounts:
     get:
       tags:
         - User Transactions
@@ -124,24 +124,15 @@ paths:
           description: Attach Bearer JWT token
           type: string
           required: true
-        - in: path
-          name: userId
-          description: User's ID
-          type: integer
-          required: true
       responses:
         "200":
           description: "Transaction retrieved successfully"
           schema:
             $ref: "#/definitions/Accounts"
-        "400":
-          description: "Bad request. User ID must be an integer and larger than 0."
         "401":
           description: "Unauthorized, invalid token"
         "403":
           description: "Forbidden, user does not have access to this account"
-        "404":
-          description: "Account not found"
         "500":
           description: "Internal Server Error"
   /user/accounts/{accountId}/transactions:
@@ -255,7 +246,7 @@ paths:
           description: "Account not found"
         "500":
           description: "Internal Server Error"
-  /user/accounts/{accountId}/transactions/delete/{transactionId}:
+  /user/accounts/{accountId}/transactions/{transactionId}:
     delete:
       tags:
         - User Transactions
